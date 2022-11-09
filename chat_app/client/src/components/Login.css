@@ -1,0 +1,12 @@
+.login-container {
+  margin-top: 20vw;
+  width: 50vw;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid;
+  padding: 2rem;
+}
+.login-container__form {
+  display: flex;
+  flex-direction: column;
+}
