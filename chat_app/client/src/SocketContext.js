@@ -8,9 +8,11 @@ const SocketProvider = ({ children }) => {
   const [user, setUser] = useState();
   const [room, setRoom] = useState();
   const [message, setMessage] = useState();
+  const [chat, setChat] = useState([]);
+
 
   return (
-    <SocketContext.Provider value={{ socket, user, setUser, room, setRoom, message, setMessage }}>
+    <SocketContext.Provider value={{ socket, user, setUser, room, setRoom, message, setMessage, chat, setChat }}>
       {children}
     </SocketContext.Provider>
 

@@ -24,7 +24,7 @@ io.on("connection", (socket) => {
     })
 
     socket.on("sendMessage", (message) => {
-      socket.to(message.room).emit('receiveMessage', message)
+      socket.to(message[0].room).emit('receiveMessage', message)
     })
 
     socket.on("disconnect", () => {
