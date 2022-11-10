@@ -10,7 +10,6 @@ const SocketProvider = ({ children }) => {
   const [message, setMessage] = useState();
   const [chat, setChat] = useState([]);
 
-
   return (
     <SocketContext.Provider value={{ socket, user, setUser, room, setRoom, message, setMessage, chat, setChat }}>
       {children}

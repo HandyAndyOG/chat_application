@@ -1,11 +1,28 @@
-.chat-message-container {
+.chat-message-container1 {
   display: flex;
   flex-direction: column;
-  border: 1px solid black;
+  border: 0.5px solid #bababa;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
   padding: 0.5rem;
   flex-wrap: wrap;
   margin-left: auto;
   width: 200px;
+  background-color: #e1f8be;
+  margin-bottom: 0.2rem;
+}
+.chat-message-container2 {
+  display: flex;
+  flex-direction: column;
+  border: 0.5px solid #bababa;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+  padding: 0.5rem;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  width: 200px;
+  background-color: #f6f6f6;
+  margin-bottom: 0.2rem;
 }
 .chat-message-container_timestamp {
   margin-left: auto;

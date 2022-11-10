@@ -1,13 +1,13 @@
-import { useContext, useEffect, useState, useRef } from "react";
+import { useContext, useEffect, useState } from "react";
 import { SocketContext } from "../SocketContext";
 import "./Chat.css";
 import ChatCard from "./ChatCard";
-import ChatOtherCard from "./ChatOtherCard";
 
 const Chat = () => {
   const { socket, user, room, message, setMessage, chat, setChat } = useContext(SocketContext);
   const [otherUser, setOtherUser] = useState("");
   const [otherMessage, setOtherMessage] = useState([]);
+  let allChats = chat.concat(otherMessage)
 
   const sendMessage = async (e) => {
     e.preventDefault();
@@ -17,12 +17,16 @@ const Chat = () => {
         room: room,
         message: message,
         timestamp: new Date().toLocaleTimeString().replace(/:([^:]*)$/g, ""),
+        sortTime: Date.now(),
+        id: 1,
       }]);
       setChat([...chat,{
         user: user,
         room: room,
         message: message,
         timestamp: new Date().toLocaleTimeString().replace(/:([^:]*)$/g, ""),
+        sortTime: Date.now(),
+        id: 1,
       }]);
     }
   };
@@ -36,22 +40,21 @@ const Chat = () => {
           room: message.room,
           message: message.message,
           timestamp: message.timestamp,
+          sortTime: message.sortTime,
+          id: 2,
         }
       })
       setOtherMessage(otherMessageContent)
     });
   }, [socket]);
 
-  console.log(otherMessage, 'here is other message');
+  const sortedChat = allChats.sort((a,b) => a.sortTime - b.sortTime)
   return (
     <>
       <div className="chat-container">
         <p className="chat-name">{otherUser}</p>
         <div className="chat-box">
-          {otherMessage? otherMessage.map((chatOtherItem, index) => {
-            return <ChatOtherCard chatOtherItem={chatOtherItem} key={index}/>
-          }): ''}
-          {chat? chat.map((chatItem, index) => {
+          {sortedChat? sortedChat.map((chatItem, index) => {
             return <ChatCard chatItem={chatItem} key={index}/>
           }): ''}
         </div>

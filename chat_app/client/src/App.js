@@ -1,15 +1,15 @@
-import './App.css';
-import Login from './components/Login'
-import Chat from './components/Chat'
+import "./App.css";
+import { Routes, Route } from "react-router-dom";
+import Login from "./components/Login";
+import Chat from "./components/Chat";
 
-
-
-
-function App() {
+const App = () => {
   return (
     <div className="App">
-      <Login />
-      <Chat />
+      <Routes>
+        <Route path="/" element={<Login />}></Route>
+        <Route path="/Room/:id" element={<Chat />}></Route>
+      </Routes>
     </div>
   );
 }

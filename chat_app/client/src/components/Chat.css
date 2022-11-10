@@ -8,6 +8,7 @@
 .chat-box {
   height: 100%;
   background-color: aliceblue;
+  padding-top: 0.2rem;
 }
 .chat-name {
   width: 100%;
@@ -15,5 +16,5 @@
   padding: 0.5rem 2rem;
   background-color: #fff;
   align-items: center;
-  border-bottom: 1px rgb(216, 216, 216) solid
+  border-bottom: 1px rgb(216, 216, 216) solid;
 }
