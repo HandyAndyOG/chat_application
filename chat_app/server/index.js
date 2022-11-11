@@ -35,7 +35,6 @@ io.on("connection", (socket) => {
 
     socket.on('leaveChat', (room) => {
       socket.leave(room)
-      socket.to(room).emit('user left', socket.id);
     })
 })
 

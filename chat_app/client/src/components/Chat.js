@@ -6,7 +6,6 @@ import ChatCard from "./ChatCard";
 
 const Chat = () => {
   const { socket, user, room, message, setMessage, chat, setChat } = useContext(SocketContext);
-  const [otherUser, setOtherUser] = useState("");
   const [otherMessage, setOtherMessage] = useState([]);
   const [all, setAll] = useState([])
   const scrollChat = useRef(null)
@@ -41,13 +40,6 @@ const Chat = () => {
 
   useEffect(() => {
     socket.on("receiveMessage", (message) => {
-      const otherUsers = message.map(users => {
-        return {
-          user: users.user
-        }
-      })
-      setOtherUser(otherUsers)
-      setOtherUser(message[0].user);
       const otherMessageContent = message.map((message) => {
         return {
           user: message.user,
@@ -60,9 +52,6 @@ const Chat = () => {
       })
       setOtherMessage(otherMessageContent)
     });
-    socket.on("currentUser",(user) => {
-      console.log(user);
-    })
   }, [socket]);
 
   useEffect(() => {
@@ -85,14 +74,14 @@ const Chat = () => {
   return (
     <>
       <div className="chat-container">
-        <p className="chat-name">{otherUser}</p>
+        <p className="chat-name">{room}</p>
         <div className="chat-box" >
           {all? all.sort((a,b) => a.sortTime - b.sortTime).map((chatItem, index) => {
             return <ChatCard chatItem={chatItem} key={index}/>
           }): ''}
           <div ref={scrollChat} />
         </div>
-      </div>
+      
       <div className="chat-input">
         <form className="chat-input_form" onSubmit={sendMessage}>
           <input className="chat-input_input"
@@ -103,8 +92,10 @@ const Chat = () => {
           />
           <button className="chat-input_button" type="submit">&#9658;</button>
         </form>
-        <button className="chat-input_submit" onClick={leaveChat}>Logout</button>
-      </div>
+        </div>
+        </div>
+        <button className="chat-input_form__button" onClick={leaveChat}>Logout</button>
+      
     </>
   );
 };

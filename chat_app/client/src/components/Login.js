@@ -18,11 +18,11 @@ const Login = () => {
   return (
     <article className="login-container">
       <form className='login-container__form' onSubmit={joinChat}>
-      <label>User: </label>
-      <input type='text' onChange={(e) => setUser(e.target.value)} />
-      <label>Room: </label>
-      <input type='text' onChange={(e) => setRoom(e.target.value)} />
-      <button type="submit">Join</button>
+        <label className='login-container__form_label'>User: </label>
+        <input placeholder='e.g. John..' className='login-container__form__input' type='text' onChange={(e) => setUser(e.target.value)} />
+        <label className='login-container__form_label'>Room: </label>
+        <input placeholder='e.g. Secret..' className='login-container__form__input' type='text' onChange={(e) => setRoom(e.target.value)} />
+        <button className="login-container__form__button" type="submit">Join</button>
       </form>
     </article>
 

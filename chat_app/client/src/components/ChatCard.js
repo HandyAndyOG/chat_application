@@ -8,7 +8,7 @@ const ChatCard = ({ chatItem, index }) => {
     {chatItem.room === room ? (
       <article key={index} className={`chat-message-container${chatItem.id}`}>
         <p className="chat-message-container_user">{chatItem.user}</p>
-        <p>{chatItem.message}</p>
+        <p className="chat-message-container_message">{chatItem.message}</p>
         <p className="chat-message-container_timestamp">{chatItem.timestamp}</p>
       </article>
     ) : (

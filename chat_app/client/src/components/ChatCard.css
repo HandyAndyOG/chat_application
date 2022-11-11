@@ -7,7 +7,8 @@
   padding: 0.5rem;
   flex-wrap: wrap;
   margin-left: auto;
-  width: 200px;
+  width: fit-content;
+  min-width: 120px;
   background-color: #e1f8be;
   margin-bottom: 0.2rem;
 }
@@ -20,14 +21,21 @@
   padding: 0.5rem;
   flex-wrap: wrap;
   align-items: flex-start;
-  width: 200px;
+  width: fit-content;
+  min-width: 120px;
   background-color: #f6f6f6;
   margin-bottom: 0.2rem;
 }
 .chat-message-container_timestamp {
   margin-left: auto;
+  color: #767676;
+  font-style: italic;
 }
 .chat-message-container_user {
   color: #767676;
-  font-style: italic;
+}
+.chat-message-container_message {
+  padding: 0.5rem;
+  max-width: 16rem;
+  word-wrap: break-word;
 }
