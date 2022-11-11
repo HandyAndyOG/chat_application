@@ -27,3 +27,7 @@
 .chat-message-container_timestamp {
   margin-left: auto;
 }
+.chat-message-container_user {
+  color: #767676;
+  font-style: italic;
+}

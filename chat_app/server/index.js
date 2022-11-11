@@ -20,15 +20,22 @@ io.on("connection", (socket) => {
 
     socket.on('joinChat', (room, user) => {
       socket.join(room, user)
+      socket.to(room).emit('currentUser', user)
       console.log(`${user} with id ${socket.id} joined room: ${room}`);
     })
 
     socket.on("sendMessage", (message) => {
+      console.log(message);
       socket.to(message[0].room).emit('receiveMessage', message)
     })
 
     socket.on("disconnect", () => {
         console.log("User disconnected", socket.id)
+    })
+
+    socket.on('leaveChat', (room) => {
+      socket.leave(room)
+      socket.to(room).emit('user left', socket.id);
     })
 })
 

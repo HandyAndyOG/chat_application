@@ -1,4 +1,5 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState, useRef } from "react";
+import { useNavigate } from 'react-router-dom';
 import { SocketContext } from "../SocketContext";
 import "./Chat.css";
 import ChatCard from "./ChatCard";
@@ -7,11 +8,13 @@ const Chat = () => {
   const { socket, user, room, message, setMessage, chat, setChat } = useContext(SocketContext);
   const [otherUser, setOtherUser] = useState("");
   const [otherMessage, setOtherMessage] = useState([]);
-  let allChats = chat.concat(otherMessage)
+  const [all, setAll] = useState([])
+  const scrollChat = useRef(null)
+  const navigate = useNavigate();
 
   const sendMessage = async (e) => {
     e.preventDefault();
-    if (message !== "") {
+    if (message) {
       await socket.emit("sendMessage", [...chat,{
         user: user,
         room: room,
@@ -29,10 +32,21 @@ const Chat = () => {
         id: 1,
       }]);
     }
+    
+    setMessage('');
   };
+  const handleChange = (e) => {
+    setMessage(e.target.value)
+  }
 
   useEffect(() => {
     socket.on("receiveMessage", (message) => {
+      const otherUsers = message.map(users => {
+        return {
+          user: users.user
+        }
+      })
+      setOtherUser(otherUsers)
       setOtherUser(message[0].user);
       const otherMessageContent = message.map((message) => {
         return {
@@ -46,28 +60,50 @@ const Chat = () => {
       })
       setOtherMessage(otherMessageContent)
     });
+    socket.on("currentUser",(user) => {
+      console.log(user);
+    })
   }, [socket]);
 
-  const sortedChat = allChats.sort((a,b) => a.sortTime - b.sortTime)
+  useEffect(() => {
+    const allMessages = chat.concat(otherMessage)
+    setAll(allMessages)
+    scrollChat.current.scrollIntoView({ behavior: "smooth",  block: "nearest",
+    inline: "start"})
+  }, [chat, otherMessage])
+
+  const leaveChat = () => {
+    if(user && room) {
+      socket.emit('leaveChat', room, user)
+      setAll([])
+      setMessage([])
+      setOtherMessage([])
+    }
+    navigate('/')
+  }
+
   return (
     <>
       <div className="chat-container">
         <p className="chat-name">{otherUser}</p>
-        <div className="chat-box">
-          {sortedChat? sortedChat.map((chatItem, index) => {
+        <div className="chat-box" >
+          {all? all.sort((a,b) => a.sortTime - b.sortTime).map((chatItem, index) => {
             return <ChatCard chatItem={chatItem} key={index}/>
           }): ''}
+          <div ref={scrollChat} />
         </div>
       </div>
       <div className="chat-input">
-        <form onSubmit={sendMessage}>
-          <input
+        <form className="chat-input_form" onSubmit={sendMessage}>
+          <input className="chat-input_input"
             type="text"
             placeholder="message.."
-            onChange={(e) => setMessage(e.target.value)}
+            onChange={handleChange}
+            value={message}
           />
-          <button type="submit">&#9658;</button>
+          <button className="chat-input_button" type="submit">&#9658;</button>
         </form>
+        <button className="chat-input_submit" onClick={leaveChat}>Logout</button>
       </div>
     </>
   );

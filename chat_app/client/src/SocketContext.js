@@ -7,7 +7,7 @@ const socket = io.connect('http://localhost:8080')
 const SocketProvider = ({ children }) => {
   const [user, setUser] = useState();
   const [room, setRoom] = useState();
-  const [message, setMessage] = useState();
+  const [message, setMessage] = useState('');
   const [chat, setChat] = useState([]);
 
   return (

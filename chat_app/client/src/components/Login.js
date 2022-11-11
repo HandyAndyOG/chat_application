@@ -22,7 +22,7 @@ const Login = () => {
       <input type='text' onChange={(e) => setUser(e.target.value)} />
       <label>Room: </label>
       <input type='text' onChange={(e) => setRoom(e.target.value)} />
-      <button  type="submit">Join</button>
+      <button type="submit">Join</button>
       </form>
     </article>
 
