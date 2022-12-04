@@ -6,6 +6,7 @@ const cors = require('cors')
 
 app.use(cors())
 
+console.log('a change')
 const server = http.createServer(app);
 const io = new Server(server
   , {
