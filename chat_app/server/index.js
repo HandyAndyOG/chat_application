@@ -3,15 +3,16 @@ const app = express();
 const http = require('http');
 const { Server } = require('socket.io')
 const cors = require('cors')
+require('dotenv').config();
 
 app.use(cors())
 
-console.log('a change')
+const PORT = process.env.PORT || 8080
 const server = http.createServer(app);
 const io = new Server(server
   , {
   cors: {
-    origin: "http://localhost:3000",
+    origin: process.env.FRONTEND,
     methods: ['GET', 'POST'],
   },
 });
@@ -40,4 +41,4 @@ io.on("connection", (socket) => {
 })
 
 
-server.listen(8080, () => console.log('Server is running at Localhost:3000'))
+server.listen(PORT, () => console.log(`Server is running at ${process.env.FRONTEND}:${PORT}`))

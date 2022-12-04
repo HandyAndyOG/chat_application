@@ -2,7 +2,7 @@ import { createContext, useState } from "react";
 import io from 'socket.io-client'
 export const SocketContext = createContext("");
 
-const socket = io.connect('http://localhost:8080')
+const socket = io.connect(process.env.REACT_APP_BACKEND)
 
 const SocketProvider = ({ children }) => {
   const [user, setUser] = useState();
