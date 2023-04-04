@@ -2,6 +2,7 @@ import { useContext, useEffect, useState, useRef } from "react";
 import { useNavigate } from 'react-router-dom';
 import { SocketContext } from "../SocketContext";
 import "./Chat.css";
+import './Login.css'
 import ChatCard from "./ChatCard";
 
 const Chat = () => {
@@ -74,7 +75,10 @@ const Chat = () => {
   return (
     <>
       <div className="chat-container">
-        <p className="chat-name">{room}</p>
+        <div className="chat-header-bar">
+
+      <span className="login-container__form__button" onClick={leaveChat}>Logout</span><p className="chat-name">{room}</p>
+        </div>
         <div className="chat-box" >
           {all? all.sort((a,b) => a.sortTime - b.sortTime).map((chatItem, index) => {
             return <ChatCard chatItem={chatItem} key={index}/>
@@ -94,7 +98,7 @@ const Chat = () => {
         </form>
         </div>
         </div>
-        <button className="chat-input_form__button" onClick={leaveChat}>Logout</button>
+        
       
     </>
   );

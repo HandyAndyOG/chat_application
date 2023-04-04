@@ -1,9 +1,8 @@
 .chat-container {
   display: flex;
   flex-direction: column;
-  width: 400px;
-  margin-top: 10vh;
-  height: 500px;
+  width: 100vw;
+  height: 100vh;
   background-color: #fff;
   border-radius: 5px;
   border: none;
@@ -72,9 +71,31 @@
   .chat-input_submit {
     width: 10vw
    }
+   .chat-container {
+    width: 400px;
+    margin-top: 10vh;
+    height: 500px;
+   }
+
+}
+.chat-header-bar {
+  display: flex;
+  flex-direction: row;
+}
+@media(min-width:768px) {
+  .chat-input_form__button {
+    width: 10vw;
+    padding: 1rem;
+    margin-top: 1rem;
+    margin-bottom: 3rem;
+    border-radius: 5px;
+    border: none;
+    align-self: center;
+    font-size: 1rem;
+    transition: 300ms;
+  }
 }
 .chat-input_form__button {
-  width: 10vw;
   padding: 1rem;
   margin-top: 1rem;
   margin-bottom: 3rem;

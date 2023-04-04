@@ -28,7 +28,6 @@ io.on("connection", (socket) => {
     })
 
     socket.on("sendMessage", (message) => {
-      console.log(message);
       socket.to(message[0].room).emit('receiveMessage', message)
     })
 

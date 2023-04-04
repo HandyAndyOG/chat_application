@@ -2,6 +2,8 @@ import './Login.css'
 import { useContext } from 'react'
 import { SocketContext } from '../SocketContext';
 import { useNavigate } from 'react-router-dom';
+import {ReactComponent as ReactLogo} from '../assets/media/chat.svg';
+
 
 
 const Login = () => {
@@ -16,6 +18,11 @@ const Login = () => {
     navigate(`/Room/${room}`)
   }
   return (
+    <>
+    <div className='app-header'>
+        <h1 className="App__h1">ChatBox</h1>
+        <span className="App__logo"><ReactLogo /></span>
+    </div>
     <article className="login-container">
       <form className='login-container__form' onSubmit={joinChat}>
         <label className='login-container__form_label'>User: </label>
@@ -25,6 +32,7 @@ const Login = () => {
         <button className="login-container__form__button" type="submit">Join</button>
       </form>
     </article>
+    </>
 
   )
 }
